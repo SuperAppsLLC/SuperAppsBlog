@@ -30,10 +30,20 @@ module.exports = ({ env }) => {
         ssl: { rejectUnauthorized: false },
         schema: env('DATABASE_SCHEMA', 'public'),
       },
-      pool: { min: env.int('DATABASE_POOL_MIN', 2), max: env.int('DATABASE_POOL_MAX', 10) },
+      acquireConnectionTimeout: 300000,
+      pool: { min: env.int('DATABASE_POOL_MIN', 2), max: env.int('DATABASE_POOL_MAX', 10) ,
+      acquireTimeoutMillis: 300000,
+createTimeoutMillis: 300000,
+destroyTimeoutMillis: 300000,
+idleTimeoutMillis: 30000,
+reapIntervalMillis:1000,
+createRetryIntervalMillis: 2000,
+propagateCreateError: false
+},
       options: {
           ssl: false
         },
+        debug: false,
     },
     sqlite: {
       connection: {

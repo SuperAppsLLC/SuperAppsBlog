@@ -40,7 +40,7 @@ module.exports = [
     {
     name: 'strapi::cors',
     config: {
-      origin: ['https://blog.superapps.com',"https://admin.superapps.com"],
+      origin: ['*'],
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
       headers: ['Content-Type', 'Authorization', 'Origin', 'Accept'],
       keepHeaderOnError: true,
