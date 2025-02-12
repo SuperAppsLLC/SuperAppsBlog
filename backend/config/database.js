@@ -20,31 +20,29 @@ module.exports = ({ env }) => {
         },
     },
     postgres: {
-      connection: {
-        connectionString: env('strapi-database1.cu1kwklhpesh.us-east-1.rds.amazonaws.com'),
-        host: env('DATABASE_HOST', 'strapi-database1.cu1kwklhpesh.us-east-1.rds.amazonaws.com'),
-        port: env.int('DATABASE_PORT', 5432),
-        database: env('DATABASE_NAME', 'strapi'),
-        user: env('DATABASE_USERNAME', 'postgres'),
-        password: env('DATABASE_PASSWORD', 'Test12345'),
-        ssl: { rejectUnauthorized: false },
-        schema: env('DATABASE_SCHEMA', 'public'),
-      },
-      acquireConnectionTimeout: 300000,
-      pool: { min: env.int('DATABASE_POOL_MIN', 2), max: env.int('DATABASE_POOL_MAX', 10) ,
-      acquireTimeoutMillis: 300000,
-createTimeoutMillis: 300000,
-destroyTimeoutMillis: 300000,
-idleTimeoutMillis: 30000,
-reapIntervalMillis:1000,
-createRetryIntervalMillis: 2000,
-propagateCreateError: false
+  connection: {
+    host: env('DATABASE_HOST', 'localhost'),
+    port: env.int('DATABASE_PORT', 5432),
+    database: env('DATABASE_NAME', 'strapi'),
+    user: env('DATABASE_USERNAME', 'postgres'),
+    password: env('DATABASE_PASSWORD', 'postgres'),
+    ssl: env.bool('DATABASE_SSL', false) ? { rejectUnauthorized: false } : false, // Ensures SSL is properly handled
+    schema: env('DATABASE_SCHEMA', 'public'),
+  },
+  acquireConnectionTimeout: 300000,
+  pool: { 
+    min: env.int('DATABASE_POOL_MIN', 2), 
+    max: env.int('DATABASE_POOL_MAX', 10),
+    acquireTimeoutMillis: 300000,
+    createTimeoutMillis: 300000,
+    destroyTimeoutMillis: 300000,
+    idleTimeoutMillis: 30000,
+    reapIntervalMillis: 1000,
+    createRetryIntervalMillis: 2000,
+    propagateCreateError: false,
+  },
+  debug: false,
 },
-      options: {
-          ssl: false
-        },
-        debug: false,
-    },
     sqlite: {
       connection: {
         filename: path.join(
